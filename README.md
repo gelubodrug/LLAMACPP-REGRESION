@@ -4,6 +4,11 @@ Reproducible headless benchmark for comparing llama.cpp commits with
 Qwen3.6-35B-A3B-MTP, an `mmproj` vision projector, and MTP speculative decoding
 enabled in the same server process.
 
+![Social thumbnail for the published llama.cpp MTP and vision benchmark](media/llama-mtp-vision-benchmark-thumbnail.png)
+
+The image above is the social-media thumbnail used for the published result;
+it summarizes this upstream llama.cpp run and is not benchmark input.
+
 ## Published result
 
 The included run completed 153/153 requests successfully:
