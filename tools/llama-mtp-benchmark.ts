@@ -16,6 +16,7 @@ type Manifest = {
 
 type Mode = "anchors" | "scan" | "auto" | "list";
 type Backend = "metal" | "cuda" | "cpu";
+type SplitMode = "none" | "layer" | "row" | "tensor";
 type CaseName = "text" | "vision" | "post-vision";
 
 type Options = {
@@ -35,7 +36,9 @@ type Options = {
   promptFile?: string;
   refineRadius: number;
   rounds: number;
+  splitMode?: SplitMode;
   stride?: number;
+  tensorSplit?: string;
   top: number;
 };
 
@@ -153,6 +156,8 @@ Benchmark:
   --port N               Local server port (default: 18081)
   --cooldown-ms N        Pause after each server run (default: 5000)
   --jobs N               Parallel compiler jobs (default: CPU count)
+  --split-mode NAME      Multi-GPU split: none, layer, row, or tensor
+  --tensor-split LIST    GPU proportions, for example 1,1
   --cache-dir PATH       Clone, builds, raw logs, CSV and Markdown
   --manifest PATH        Commit manifest JSON
 
@@ -163,7 +168,7 @@ Pause and resume:
 
 Environment aliases:
   LLAMA_BENCH_MODEL, LLAMA_BENCH_MMPROJ, LLAMA_BENCH_IMAGE,
-  LLAMA_BENCH_BACKEND
+  LLAMA_BENCH_BACKEND, LLAMA_BENCH_SPLIT_MODE, LLAMA_BENCH_TENSOR_SPLIT
 `);
   process.exit(0);
 }
@@ -223,6 +228,18 @@ function parseArgs(argv: string[]): Options {
       }
       options.mode = value as Mode;
       index += 1;
+    } else if (flag === "--split-mode") {
+      if (!value || !["none", "layer", "row", "tensor"].includes(value)) {
+        throw new Error("--split-mode must be none, layer, row, or tensor");
+      }
+      options.splitMode = value as SplitMode;
+      index += 1;
+    } else if (flag === "--tensor-split") {
+      if (!value || !/^\d+(?:\.\d+)?(?:,\d+(?:\.\d+)?)+$/.test(value)) {
+        throw new Error("--tensor-split requires comma-separated GPU proportions, for example 1,1");
+      }
+      options.tensorSplit = value;
+      index += 1;
     } else if (flag === "--rounds") options.rounds = parsePositiveInt(value, flag), index += 1;
     else if (flag === "--stride") options.stride = parsePositiveInt(value, flag), index += 1;
     else if (flag === "--top") options.top = parsePositiveInt(value, flag), index += 1;
@@ -245,6 +262,14 @@ function parseArgs(argv: string[]): Options {
     }
     options.backend = backend as Backend;
   }
+  if (process.env.LLAMA_BENCH_SPLIT_MODE && !options.splitMode) {
+    const splitMode = process.env.LLAMA_BENCH_SPLIT_MODE;
+    if (!["none", "layer", "row", "tensor"].includes(splitMode)) {
+      throw new Error("LLAMA_BENCH_SPLIT_MODE must be none, layer, row, or tensor");
+    }
+    options.splitMode = splitMode as SplitMode;
+  }
+  options.tensorSplit ??= process.env.LLAMA_BENCH_TENSOR_SPLIT;
   return options;
 }
 
@@ -487,6 +512,9 @@ async function startServer(
     "--host", "127.0.0.1",
     "--port", String(options.port),
   ];
+  if (options.splitMode) args.push("--split-mode", options.splitMode);
+  if (options.tensorSplit) args.push("--tensor-split", options.tensorSplit);
+  if (options.splitMode === "tensor") args.push("--fit", "off");
   const child = spawn(binary, args, { stdio: ["ignore", "pipe", "pipe"] });
   activeProcess = child;
   let log = "";
@@ -805,7 +833,31 @@ async function benchmarkCandidates(
         await writeReports(options.cacheDir, samples, benchmarkKey, options.backend);
         continue;
       }
-      const server = await startServer(binary, candidate, options, join(serverLogs, `${candidate.shortSha}-r${round}-server.log`));
+      let server: ServerHandle;
+      try {
+        server = await startServer(binary, candidate, options, join(serverLogs, `${candidate.shortSha}-r${round}-server.log`));
+      } catch (error) {
+        throwIfPaused();
+        const message = `Server failed to start: ${error instanceof Error ? error.message : String(error)}`;
+        console.error(`[${candidate.shortSha}] ${message}`);
+        unbuildable.add(candidate.sha);
+        for (const caseName of ["text", "vision", "post-vision"] as const) {
+          if (completedCases.has(caseName)) continue;
+          recordSample(samples, {
+            benchmarkKey,
+            caseName,
+            commit: candidate.sha,
+            error: message,
+            label: candidate.labels.join("+"),
+            outputCharacters: 0,
+            round,
+            success: false,
+            totalMs: 0,
+          });
+        }
+        await writeReports(options.cacheDir, samples, benchmarkKey, options.backend);
+        continue;
+      }
       try {
         for (const caseName of ["text", "vision", "post-vision"] as const) {
           if (completedCases.has(caseName)) continue;
@@ -838,11 +890,22 @@ function benchmarkKey(options: Options, prompt: string): string {
     model: resolve(String(options.model)),
     prompt,
     protocol: 1,
+    splitMode: options.splitMode,
+    tensorSplit: options.tensorSplit,
   })).digest("hex").slice(0, 12);
 }
 
 async function validateInputs(options: Options): Promise<void> {
   if (options.mode === "list") return;
+  if (options.splitMode === "tensor" && options.backend !== "cuda") {
+    throw new Error("--split-mode tensor is supported by this benchmark preset only with --backend cuda");
+  }
+  if (options.tensorSplit && !options.splitMode) {
+    throw new Error("--tensor-split requires --split-mode so the benchmark configuration is explicit");
+  }
+  if (options.tensorSplit && !/^\d+(?:\.\d+)?(?:,\d+(?:\.\d+)?)+$/.test(options.tensorSplit)) {
+    throw new Error("tensor split requires comma-separated GPU proportions, for example 1,1");
+  }
   const required = [["--model", options.model], ["--mmproj", options.mmproj], ["--image", options.image]] as const;
   for (const [flag, path] of required) {
     if (!path) throw new Error(`${flag} is required outside list mode`);
@@ -886,6 +949,7 @@ async function main(): Promise<void> {
   console.log(`Model: ${basename(String(options.model))}`);
   console.log(`Projector: ${basename(String(options.mmproj))}`);
   console.log(`Image: ${basename(String(options.image))}`);
+  console.log(`Split mode: ${options.splitMode ?? "llama.cpp default"}${options.tensorSplit ? `; tensor split: ${options.tensorSplit}` : ""}`);
   console.log(`Candidates: ${candidates.length}; rounds: ${options.rounds}`);
   console.log(`Benchmark key: ${runKey}`);
 

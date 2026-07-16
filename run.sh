@@ -85,6 +85,14 @@ if [[ -n "${ONLY:-}" ]]; then
   args+=(--only "$ONLY")
 fi
 
+if [[ -n "${SPLIT_MODE:-}" ]]; then
+  args+=(--split-mode "$SPLIT_MODE")
+fi
+
+if [[ -n "${TENSOR_SPLIT:-}" ]]; then
+  args+=(--tensor-split "$TENSOR_SPLIT")
+fi
+
 mkdir -p "$CACHE_DIR"
 printf 'Running:'
 printf ' %q' "$NODE_BIN" --experimental-strip-types "$ROOT/tools/llama-mtp-benchmark.ts" "${args[@]}"
