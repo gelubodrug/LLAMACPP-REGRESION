@@ -1,0 +1,32 @@
+0.03.029.932 I srv    operator(): Chat format: peg-native
+0.03.030.324 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.03.030.326 I srv  get_availabl: updating prompt cache
+0.03.030.329 I srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+0.03.030.330 I srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 262144 tokens, 8589934592 est)
+0.03.030.330 I srv  get_availabl: prompt cache update took 0.00 ms
+0.03.030.363 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.03.030.555 I srv  stream_sessi: stream_session_attach_pipe: conv_id= (empty=1)
+0.07.170.098 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.30, t =   4.14 s / 1978.87 tokens per second
+0.08.432.048 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  10240, progress = 0.37, t =   5.40 s / 1895.71 tokens per second
+0.09.742.722 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.44, t =   6.71 s / 1830.66 tokens per second
+0.11.275.339 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  14336, progress = 0.52, t =   8.24 s / 1738.76 tokens per second
+0.12.928.379 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.59, t =   9.90 s / 1655.28 tokens per second
+0.14.703.144 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  18432, progress = 0.67, t =  11.67 s / 1579.06 tokens per second
+0.16.669.366 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.74, t =  13.64 s / 1501.58 tokens per second
+0.18.596.359 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  22528, progress = 0.81, t =  15.57 s / 1447.26 tokens per second
+0.20.649.238 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.89, t =  17.62 s / 1394.87 tokens per second
+0.22.683.682 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  26624, progress = 0.96, t =  19.65 s / 1354.68 tokens per second
+0.23.253.833 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27128, progress = 0.98, t =  20.22 s / 1341.41 tokens per second
+0.23.298.628 I slot create_check: id  0 | task 0 | created context checkpoint 1 of 32 (pos_min = 27127, pos_max = 27127, n_tokens = 27128, size = 116.315 MiB)
+0.23.899.730 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27623, progress = 1.00, t =  20.87 s / 1323.62 tokens per second
+0.23.943.435 I slot create_check: id  0 | task 0 | created context checkpoint 2 of 32 (pos_min = 27622, pos_max = 27622, n_tokens = 27623, size = 117.291 MiB)
+0.24.045.727 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27640, progress = 1.00, t =  21.02 s / 1315.23 tokens per second
+0.27.105.263 I slot print_timing: id  0 | task 0 | n_decoded =    255, tg =  84.39 t/s, tg_3s =  84.39 t/s
+0.27.120.711 I slot print_timing: id  0 | task 0 | prompt eval time =   21053.20 ms / 27644 tokens (    0.76 ms per token,  1313.05 tokens per second)
+0.27.120.713 I slot print_timing: id  0 | task 0 |        eval time =    3037.13 ms /   256 tokens (   11.86 ms per token,    84.29 tokens per second)
+0.27.120.714 I slot print_timing: id  0 | task 0 |       total time =   24090.33 ms / 27900 tokens
+0.27.120.714 I slot print_timing: id  0 | task 0 |    graphs reused =        107
+0.27.120.719 I slot print_timing: id  0 | task 0 | draft acceptance = 0.67593 (  146 accepted /   216 generated), mean acceptance length =  2.35, acceptance rate per position = (0.815, 0.537)
+0.27.120.728 I statistics        draft-mtp: #calls(b,g,a) =    1    108    108, #gen drafts =    108, #acc drafts =    88, #gen tokens =    216, #acc tokens =   146, #mean acc len = 2.35, #acc rate/pos = (0.815, 0.537), dur(b,g,a) = 0.002, 471.929, 0.057 ms
+0.27.121.191 I slot      release: id  0 | task 0 | stop processing: n_tokens = 27899, truncated = 0
+0.27.121.197 I srv  update_slots: all slots are idle

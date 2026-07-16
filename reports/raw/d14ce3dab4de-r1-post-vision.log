@@ -1,0 +1,55 @@
+0.54.902.099 I srv  params_from_: Chat format: peg-native
+0.54.902.196 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.894 (> 0.100 thold), f_keep = 0.888
+0.54.902.231 I slot launch_slot_: id  0 | task 255 | processing task, is_child = 0
+0.54.902.235 W slot update_slots: id  0 | task 255 | erased invalidated context checkpoint (pos_min = 8191, pos_max = 8191, n_tokens = 8192, n_swa = 0, pos_next = 0, size = 78.970 MiB)
+0.54.902.236 W slot update_slots: id  0 | task 255 | erased invalidated context checkpoint (pos_min = 16383, pos_max = 16383, n_tokens = 16384, n_swa = 0, pos_next = 0, size = 95.126 MiB)
+0.54.902.237 W slot update_slots: id  0 | task 255 | erased invalidated context checkpoint (pos_min = 24575, pos_max = 24575, n_tokens = 24576, n_swa = 0, pos_next = 0, size = 111.282 MiB)
+0.54.902.239 W slot update_slots: id  0 | task 255 | erased invalidated context checkpoint (pos_min = 27706, pos_max = 27706, n_tokens = 30857, n_swa = 0, pos_next = 0, size = 123.669 MiB)
+0.58.501.520 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =   8192, progress = 0.27, t =   3.60 s / 2276.01 tokens per second
+0.58.501.717 I slot update_slots: id  0 | task 255 | 8192 tokens since last checkpoint at 0, creating new checkpoint during processing at position 10240
+0.58.523.686 I slot create_check: id  0 | task 255 | created context checkpoint 1 of 32 (pos_min = 8191, pos_max = 8191, n_tokens = 8192, size = 78.970 MiB)
+0.59.650.334 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  10240, progress = 0.33, t =   4.75 s / 2156.65 tokens per second
+1.00.878.140 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  12288, progress = 0.40, t =   5.98 s / 2056.26 tokens per second
+1.02.203.639 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  14336, progress = 0.46, t =   7.30 s / 1963.46 tokens per second
+1.03.587.626 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  16384, progress = 0.53, t =   8.69 s / 1886.39 tokens per second
+1.03.587.831 I slot update_slots: id  0 | task 255 | 8192 tokens since last checkpoint at 8192, creating new checkpoint during processing at position 18432
+1.03.617.578 I slot create_check: id  0 | task 255 | created context checkpoint 2 of 32 (pos_min = 16383, pos_max = 16383, n_tokens = 16384, size = 95.126 MiB)
+1.05.060.206 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  18432, progress = 0.60, t =  10.16 s / 1814.54 tokens per second
+1.06.617.647 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  20480, progress = 0.66, t =  11.72 s / 1748.12 tokens per second
+1.08.250.683 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  22528, progress = 0.73, t =  13.35 s / 1687.69 tokens per second
+1.09.960.621 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  24576, progress = 0.80, t =  15.06 s / 1632.05 tokens per second
+1.09.960.821 I slot update_slots: id  0 | task 255 | 8192 tokens since last checkpoint at 16384, creating new checkpoint during processing at position 26624
+1.09.998.542 I slot create_check: id  0 | task 255 | created context checkpoint 3 of 32 (pos_min = 24575, pos_max = 24575, n_tokens = 24576, size = 111.282 MiB)
+1.11.769.319 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  26624, progress = 0.86, t =  16.87 s / 1578.46 tokens per second
+1.12.696.035 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  27642, progress = 0.89, t =  17.79 s / 1553.46 tokens per second
+1.12.696.198 I srv  process_chun: processing image...
+1.15.904.429 W find_slot: non-consecutive token position 27642 after 27641 for sequence 0 with 512 new tokens
+1.15.904.432 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.15.904.432 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.15.904.433 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.15.904.980 W find_slot: non-consecutive token position 27642 after 27641 for sequence 0 with 512 new tokens
+1.15.910.809 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.16.331.797 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.16.762.114 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.17.196.548 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.17.196.551 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.17.196.551 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 141 new tokens
+1.17.196.873 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.17.631.268 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.18.075.820 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 141 new tokens
+1.18.533.112 I srv  process_chun: image processed in 5837 ms
+1.18.533.115 I srv  process_chun: processing image...
+1.22.135.955 I srv  process_chun: image processed in 3603 ms
+1.22.136.631 W find_slot: non-consecutive token position 27746 after 27642 for sequence 0 with 42 new tokens
+1.22.136.664 W find_slot: non-consecutive token position 27746 after 27642 for sequence 0 with 42 new tokens
+1.22.246.004 I slot print_timing: id  0 | task 255 | prompt processing, n_tokens =  30897, progress = 1.00, t =  27.34 s / 1129.95 tokens per second
+1.22.255.447 I slot create_check: id  0 | task 255 | created context checkpoint 4 of 32 (pos_min = 27746, pos_max = 27746, n_tokens = 30897, size = 123.748 MiB)
+1.23.715.149 I slot print_timing: id  0 | task 255 | n_decoded =    102, tg =  71.40 t/s
+1.25.795.167 I slot print_timing: id  0 | task 255 | prompt eval time =   27384.28 ms / 30901 tokens (    0.89 ms per token,  1128.42 tokens per second)
+1.25.795.170 I slot print_timing: id  0 | task 255 |        eval time =    3508.49 ms /   256 tokens (   13.71 ms per token,    72.97 tokens per second)
+1.25.795.170 I slot print_timing: id  0 | task 255 |       total time =   30892.77 ms / 31157 tokens
+1.25.795.170 I slot print_timing: id  0 | task 255 |    graphs reused =        327
+1.25.795.171 I slot print_timing: id  0 | task 255 | draft acceptance = 0.62832 (  142 accepted /   226 generated)
+1.25.795.176 I statistics        draft-mtp: #calls(b,g,a) =    3    334    334, #gen drafts =    334, #acc drafts =   265, #gen tokens =    666, #acc tokens =   431, dur(b,g,a) = 0.002, 1666.500, 0.165 ms
+1.25.795.647 I slot      release: id  0 | task 255 | stop processing: n_tokens = 31156, truncated = 0
+1.25.795.654 I srv  update_slots: all slots are idle

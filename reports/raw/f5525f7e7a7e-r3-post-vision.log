@@ -1,0 +1,38 @@
+0.48.509.904 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.894 (> 0.100 thold), f_keep = 0.888
+0.48.509.945 I slot launch_slot_: id  0 | task 254 | processing task, is_child = 0
+0.51.893.191 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =   8192, progress = 0.27, t =   3.38 s / 2421.35 tokens per second
+0.52.964.713 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  10240, progress = 0.33, t =   4.45 s / 2298.66 tokens per second
+0.54.119.725 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  12288, progress = 0.40, t =   5.61 s / 2190.46 tokens per second
+0.55.356.385 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  14336, progress = 0.46, t =   6.85 s / 2093.94 tokens per second
+0.56.671.659 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  16384, progress = 0.53, t =   8.16 s / 2007.42 tokens per second
+0.58.072.663 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  18432, progress = 0.60, t =   9.56 s / 1927.49 tokens per second
+0.59.541.624 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  20480, progress = 0.66, t =  11.03 s / 1856.47 tokens per second
+1.01.086.119 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  22528, progress = 0.73, t =  12.58 s / 1791.32 tokens per second
+1.02.732.062 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  24576, progress = 0.80, t =  14.22 s / 1728.01 tokens per second
+1.04.452.182 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  26624, progress = 0.86, t =  15.94 s / 1670.03 tokens per second
+1.05.326.185 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  27625, progress = 0.89, t =  16.82 s / 1642.76 tokens per second
+1.05.442.532 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  27642, progress = 0.89, t =  16.93 s / 1632.47 tokens per second
+1.08.574.908 W find_slot: non-consecutive token position 27642 after 27641 for sequence 0 with 512 new tokens
+1.08.574.911 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.08.574.911 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.08.574.911 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.08.575.437 W find_slot: non-consecutive token position 27642 after 27641 for sequence 0 with 512 new tokens
+1.08.579.938 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.08.987.351 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.09.401.253 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.09.826.815 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.09.826.818 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.09.826.818 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 141 new tokens
+1.09.827.131 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.10.256.694 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 512 new tokens
+1.10.690.906 W find_slot: non-consecutive token position 27642 after 27642 for sequence 0 with 141 new tokens
+1.11.137.434 W find_slot: non-consecutive token position 27724 after 27642 for sequence 0 with 20 new tokens
+1.11.137.461 W find_slot: non-consecutive token position 27724 after 27642 for sequence 0 with 20 new tokens
+1.11.394.156 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  30875, progress = 1.00, t =  22.88 s / 1349.18 tokens per second
+1.11.485.396 I slot print_timing: id  0 | task 254 | prompt processing, n_tokens =  30897, progress = 1.00, t =  22.98 s / 1344.78 tokens per second
+1.14.210.430 I slot print_timing: id  0 | task 254 | prompt eval time =   23003.30 ms / 30901 tokens (    0.74 ms per token,  1343.33 tokens per second)
+1.14.210.433 I slot print_timing: id  0 | task 254 |        eval time =    2697.18 ms /   256 tokens (   10.54 ms per token,    94.91 tokens per second)
+1.14.210.434 I slot print_timing: id  0 | task 254 |       total time =   25700.48 ms / 31157 tokens
+1.14.210.434 I slot print_timing: id  0 | task 254 |    graphs reused =        315
+1.14.210.436 I slot print_timing: id  0 | task 254 | draft acceptance = 0.70952 (  149 accepted /   210 generated), mean len =  2.42
+1.14.210.910 I slot      release: id  0 | task 254 | stop processing: n_tokens = 31156, truncated = 0

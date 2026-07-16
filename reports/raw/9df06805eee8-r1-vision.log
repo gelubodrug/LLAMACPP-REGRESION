@@ -1,0 +1,45 @@
+0.26.215.240 I srv    operator(): Chat format: peg-native
+0.26.215.461 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.895 (> 0.100 thold), f_keep = 0.990
+0.26.215.493 I slot launch_slot_: id  0 | task 132 | processing task, is_child = 0
+0.26.215.499 W slot   operator(): id  0 | task 132 | erased invalidated context checkpoint (pos_min = 27127, pos_max = 27127, n_tokens = 27128, n_swa = 0, pos_next = 0, size = 116.315 MiB)
+0.26.215.500 W slot   operator(): id  0 | task 132 | erased invalidated context checkpoint (pos_min = 27622, pos_max = 27622, n_tokens = 27623, n_swa = 0, pos_next = 0, size = 117.291 MiB)
+0.26.215.513 I srv  stream_sessi: stream_session_attach_pipe: conv_id= (empty=1)
+0.29.795.245 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =   8192, progress = 0.27, t =   3.58 s / 2288.43 tokens per second
+0.30.921.265 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  10240, progress = 0.33, t =   4.71 s / 2176.05 tokens per second
+0.32.149.765 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  12288, progress = 0.40, t =   5.93 s / 2070.69 tokens per second
+0.33.470.159 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  14336, progress = 0.46, t =   7.25 s / 1976.11 tokens per second
+0.34.878.749 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  16384, progress = 0.53, t =   8.66 s / 1891.21 tokens per second
+0.36.386.946 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  18432, progress = 0.60, t =  10.17 s / 1812.13 tokens per second
+0.38.020.803 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  20480, progress = 0.66, t =  11.81 s / 1734.81 tokens per second
+0.39.760.190 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  22528, progress = 0.73, t =  13.54 s / 1663.23 tokens per second
+0.41.633.590 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  24576, progress = 0.80, t =  15.42 s / 1593.97 tokens per second
+0.43.618.541 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  26624, progress = 0.86, t =  17.40 s / 1529.85 tokens per second
+0.44.640.419 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  27623, progress = 0.90, t =  18.42 s / 1499.22 tokens per second
+0.44.671.961 I slot create_check: id  0 | task 132 | created context checkpoint 1 of 32 (pos_min = 27622, pos_max = 27622, n_tokens = 27623, size = 117.291 MiB)
+0.44.758.595 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  27640, progress = 0.90, t =  18.54 s / 1490.58 tokens per second
+0.44.758.794 I slot process_mtmd: id  0 | task 132 | encoding mtmd batch from idx = 27640, n_chunks = 1
+0.48.444.768 W find_slot: non-consecutive token position 27640 after 27639 for sequence 0 with 512 new tokens
+0.48.444.772 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.48.444.772 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.48.444.773 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.48.445.394 W find_slot: non-consecutive token position 27640 after 27639 for sequence 0 with 512 new tokens
+0.48.451.046 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.48.935.304 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.49.438.651 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.49.943.892 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.49.943.896 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.49.943.896 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 141 new tokens
+0.49.944.528 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.50.460.220 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 512 new tokens
+0.50.972.305 W find_slot: non-consecutive token position 27640 after 27640 for sequence 0 with 141 new tokens
+0.51.493.206 W find_slot: non-consecutive token position 27706 after 27640 for sequence 0 with 4 new tokens
+0.51.493.223 W find_slot: non-consecutive token position 27706 after 27640 for sequence 0 with 4 new tokens
+0.51.714.974 I slot print_timing: id  0 | task 132 | prompt processing, n_tokens =  30857, progress = 1.00, t =  25.50 s / 1210.10 tokens per second
+0.54.474.771 I slot print_timing: id  0 | task 132 | prompt eval time =   25528.80 ms / 30861 tokens (    0.83 ms per token,  1208.87 tokens per second)
+0.54.474.773 I slot print_timing: id  0 | task 132 |        eval time =    2730.31 ms /   256 tokens (   10.67 ms per token,    93.76 tokens per second)
+0.54.474.774 I slot print_timing: id  0 | task 132 |       total time =   28259.11 ms / 31117 tokens
+0.54.474.774 I slot print_timing: id  0 | task 132 |    graphs reused =        210
+0.54.474.776 I slot print_timing: id  0 | task 132 | draft acceptance = 0.77889 (  155 accepted /   199 generated), mean acceptance length =  2.55, acceptance rate per position = (0.890, 0.660)
+0.54.474.783 I statistics        draft-mtp: #calls(b,g,a) =    2    214    214, #gen drafts =    214, #acc drafts =   178, #gen tokens =    427, #acc tokens =   296, #mean acc len = 2.38, #acc rate/pos = (0.832, 0.551), dur(b,g,a) = 0.000, 892.827, 0.167 ms
+0.54.475.269 I slot      release: id  0 | task 132 | stop processing: n_tokens = 31116, truncated = 0
+0.54.475.276 I srv  update_slots: all slots are idle

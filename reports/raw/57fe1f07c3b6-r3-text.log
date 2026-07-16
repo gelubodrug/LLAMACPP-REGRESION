@@ -1,0 +1,30 @@
+0.03.039.188 I srv  params_from_: Chat format: peg-native
+0.03.055.265 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.03.055.269 I srv  get_availabl: updating prompt cache
+0.03.055.271 I srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+0.03.055.272 I srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 262144 tokens, 8589934592 est)
+0.03.055.273 I srv  get_availabl: prompt cache update took 0.00 ms
+0.03.055.315 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.06.420.280 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.30, t =   3.36 s / 2434.50 tokens per second
+0.07.476.141 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  10240, progress = 0.37, t =   4.42 s / 2316.31 tokens per second
+0.08.603.888 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.44, t =   5.55 s / 2214.63 tokens per second
+0.09.817.907 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  14336, progress = 0.52, t =   6.76 s / 2119.90 tokens per second
+0.11.114.310 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.59, t =   8.06 s / 2033.01 tokens per second
+0.12.482.432 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  18432, progress = 0.67, t =   9.43 s / 1955.21 tokens per second
+0.13.925.183 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.74, t =  10.87 s / 1884.11 tokens per second
+0.15.445.053 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  22528, progress = 0.81, t =  12.39 s / 1818.28 tokens per second
+0.17.052.145 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.89, t =  14.00 s / 1755.83 tokens per second
+0.18.743.403 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  26624, progress = 0.96, t =  15.69 s / 1697.08 tokens per second
+0.19.165.753 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27128, progress = 0.98, t =  16.11 s / 1683.88 tokens per second
+0.19.593.865 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27623, progress = 1.00, t =  16.54 s / 1670.22 tokens per second
+0.19.624.191 I slot create_check: id  0 | task 0 | created context checkpoint 1 of 32 (pos_min = 27622, pos_max = 27622, n_tokens = 27623, size = 117.291 MiB)
+0.19.702.301 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27640, progress = 1.00, t =  16.65 s / 1660.36 tokens per second
+0.20.905.306 I slot print_timing: id  0 | task 0 | n_decoded =    102, tg =  86.81 t/s
+0.22.664.239 I slot print_timing: id  0 | task 0 | prompt eval time =   16674.75 ms / 27644 tokens (    0.60 ms per token,  1657.84 tokens per second)
+0.22.664.242 I slot print_timing: id  0 | task 0 |        eval time =    2934.16 ms /   256 tokens (   11.46 ms per token,    87.25 tokens per second)
+0.22.664.242 I slot print_timing: id  0 | task 0 |       total time =   19608.92 ms / 27900 tokens
+0.22.664.243 I slot print_timing: id  0 | task 0 |    graphs reused =        115
+0.22.664.243 I slot print_timing: id  0 | task 0 | draft acceptance = 0.58798 (  137 accepted /   233 generated)
+0.22.664.249 I statistics        draft-mtp: #calls(b,g,a) =    1    117    117, #gen drafts =    117, #acc drafts =    86, #gen tokens =    233, #acc tokens =   137, dur(b,g,a) = 0.001, 460.330, 0.072 ms
+0.22.664.888 I slot      release: id  0 | task 0 | stop processing: n_tokens = 27899, truncated = 0
+0.22.664.891 I srv  update_slots: all slots are idle

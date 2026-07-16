@@ -1,0 +1,34 @@
+{
+  "repository": "https://github.com/ggml-org/llama.cpp.git",
+  "range": {
+    "start": "6ee0f657",
+    "end": "b9935",
+    "stride": 50
+  },
+  "anchors": [
+    {
+      "ref": "6ee0f657",
+      "label": "mtp-vision-baseline"
+    },
+    {
+      "ref": "e9fb3b3f",
+      "label": "community-fastest"
+    },
+    {
+      "ref": "b9222",
+      "label": "pre-regression"
+    },
+    {
+      "ref": "b9235",
+      "label": "reported-regression"
+    },
+    {
+      "ref": "b9620",
+      "label": "co-de-tested"
+    },
+    {
+      "ref": "b9935",
+      "label": "issue-25489-head"
+    }
+  ]
+}

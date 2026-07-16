@@ -1,0 +1,32 @@
+0.03.005.988 I srv    operator(): Chat format: peg-native
+0.03.006.425 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.03.006.427 I srv  get_availabl: updating prompt cache
+0.03.006.600 I srv          load:  - looking for better prompt, base f_keep = -1.000, sim = 0.000
+0.03.006.602 I srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 262144 tokens, 8589934592 est)
+0.03.006.604 I srv  get_availabl: prompt cache update took 0.17 ms
+0.03.006.641 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.06.281.218 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   6144, progress = 0.22, t =   3.27 s / 1876.29 tokens per second
+0.07.646.749 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.30, t =   4.64 s / 1765.49 tokens per second
+0.09.093.293 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  10240, progress = 0.37, t =   6.09 s / 1682.38 tokens per second
+0.10.638.790 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.44, t =   7.63 s / 1610.04 tokens per second
+0.12.350.596 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  14336, progress = 0.52, t =   9.34 s / 1534.26 tokens per second
+0.14.103.134 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.59, t =  11.10 s / 1476.51 tokens per second
+0.15.889.892 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  18432, progress = 0.67, t =  12.88 s / 1430.70 tokens per second
+0.17.834.183 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.74, t =  14.83 s / 1381.22 tokens per second
+0.19.959.544 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  22528, progress = 0.81, t =  16.95 s / 1328.86 tokens per second
+0.22.283.415 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.89, t =  19.28 s / 1274.90 tokens per second
+0.24.661.033 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  26624, progress = 0.96, t =  21.65 s / 1229.50 tokens per second
+0.25.292.338 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27128, progress = 0.98, t =  22.29 s / 1217.28 tokens per second
+0.25.334.700 I slot create_check: id  0 | task 0 | created context checkpoint 1 of 32 (pos_min = 27127, pos_max = 27127, n_tokens = 27128, size = 116.315 MiB)
+0.25.914.156 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27623, progress = 1.00, t =  22.91 s / 1205.85 tokens per second
+0.25.955.273 I slot create_check: id  0 | task 0 | created context checkpoint 2 of 32 (pos_min = 27622, pos_max = 27622, n_tokens = 27623, size = 117.291 MiB)
+0.26.060.274 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  27640, progress = 1.00, t =  23.05 s / 1198.94 tokens per second
+0.29.108.244 I slot print_timing: id  0 | task 0 | n_decoded =    230, tg =  76.36 t/s, tg_3s =  76.35 t/s
+0.29.595.987 I slot print_timing: id  0 | task 0 | prompt eval time =   23089.18 ms / 27644 tokens (    0.84 ms per token,  1197.27 tokens per second)
+0.29.595.989 I slot print_timing: id  0 | task 0 |        eval time =    3500.13 ms /   256 tokens (   13.67 ms per token,    73.14 tokens per second)
+0.29.595.990 I slot print_timing: id  0 | task 0 |       total time =   26589.31 ms / 27900 tokens
+0.29.595.990 I slot print_timing: id  0 | task 0 |    graphs reused =        115
+0.29.595.992 I slot print_timing: id  0 | task 0 | draft acceptance = 0.58798 (  137 accepted /   233 generated), mean acceptance length =  2.17, acceptance rate per position = (0.735, 0.436)
+0.29.595.998 I statistics        draft-mtp: #calls(b,g,a) =    1    117    117, #gen drafts =    117, #acc drafts =    86, #gen tokens =    233, #acc tokens =   137, #mean acc len = 2.17, #acc rate/pos = (0.735, 0.436), dur(b,g,a) = 0.001, 534.756, 0.069 ms
+0.29.596.439 I slot      release: id  0 | task 0 | stop processing: n_tokens = 27899, truncated = 0
+0.29.596.442 I srv  update_slots: all slots are idle

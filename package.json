@@ -1,0 +1,9 @@
+{
+  "name": "llama-mtp-vision-regression-benchmark",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "benchmark": "./run.sh",
+    "monitor": "./monitor.sh"
+  }
+}

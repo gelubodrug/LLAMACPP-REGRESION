@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>llama.cpp MTP + Vision Benchmark — Winners &amp; Methodology</title>
+<style>
+  :root{
+    color-scheme: light dark;
+    --page:        #f9f9f7;
+    --surface:     #fcfcfb;
+    --surface-2:   #ffffff;
+    --ink:         #0b0b0b;
+    --ink-2:       #52514e;
+    --muted:       #898781;
+    --grid:        #e1e0d9;
+    --baseline:    #c3c2b7;
+    --border:      rgba(11,11,11,0.10);
+    --blue:        #2a78d6;
+    --blue-soft:   #cde2fb;
+    --good:        #0ca30c;
+    --good-ink:    #006300;
+    --critical:    #d03b3b;
+    --shadow:      0 1px 2px rgba(11,11,11,.05), 0 6px 24px rgba(11,11,11,.06);
+    --radius:      16px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --page:      #0d0d0d;
+      --surface:   #1a1a19;
+      --surface-2: #201f1e;
+      --ink:       #ffffff;
+      --ink-2:     #c3c2b7;
+      --muted:     #898781;
+      --grid:      #2c2c2a;
+      --baseline:  #383835;
+      --border:    rgba(255,255,255,0.10);
+      --blue:      #3987e5;
+      --blue-soft: #1c3a5e;
+      --good:      #0ca30c;
+      --good-ink:  #4fd44f;
+      --critical:  #e66767;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 30px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--page); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:clamp(20px,5vw,56px) clamp(16px,4vw,32px) 80px}
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; margin:0 0 12px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,44px); line-height:1.1; letter-spacing:-.02em;
+    margin:0 0 12px; font-weight:700;
+  }
+  .lede{font-size:clamp(16px,2.2vw,19px); color:var(--ink-2); margin:0 0 8px; max-width:70ch}
+  .meta-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px}
+  .chip{
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--surface); border:1px solid var(--border); border-radius:999px;
+    padding:6px 13px; font-size:13px; color:var(--ink-2); box-shadow:var(--shadow);
+  }
+  .chip b{color:var(--ink); font-weight:600}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--blue)}
+
+  section{margin-top:clamp(40px,7vw,64px)}
+  .sec-head{display:flex; align-items:baseline; gap:12px; margin:0 0 20px}
+  h2{font-size:clamp(20px,3vw,26px); letter-spacing:-.01em; margin:0; font-weight:700}
+  .sec-sub{color:var(--muted); font-size:14px; margin:0}
+
+  /* Winner hero card */
+  .winner{
+    background:
+      radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--good) 12%, transparent), transparent 60%),
+      var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius);
+    padding:clamp(22px,4vw,34px); box-shadow:var(--shadow);
+    display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(22px,4vw,40px);
+  }
+  @media(max-width:680px){ .winner{grid-template-columns:1fr} }
+  .winner .badge{
+    display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:13px;
+    color:var(--good-ink); background:color-mix(in srgb, var(--good) 15%, transparent);
+    border-radius:999px; padding:5px 12px; margin-bottom:16px;
+  }
+  .hash{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:clamp(22px,3.4vw,30px); font-weight:600; letter-spacing:-.01em; margin:0;
+  }
+  .alias{color:var(--ink-2); font-size:15px; margin:4px 0 0}
+  .headline-num{
+    font-size:clamp(40px,8vw,62px); font-weight:700; letter-spacing:-.03em;
+    line-height:1; margin:18px 0 2px;
+  }
+  .headline-num .unit{font-size:.34em; color:var(--ink-2); font-weight:600; letter-spacing:0}
+  .delta{color:var(--good-ink); font-weight:600; font-size:15px}
+  .breakdown{align-self:center}
+  .breakdown .row{
+    display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px;
+    padding:11px 0; border-bottom:1px solid var(--grid);
+  }
+  .breakdown .row:last-child{border-bottom:0}
+  .breakdown .row.total{font-weight:700}
+  .breakdown .row.total span:last-child{color:var(--good-ink)}
+  .breakdown .lab{color:var(--ink-2); font-size:14px}
+  .breakdown .val{font-variant-numeric:tabular-nums; font-weight:600}
+
+  /* Category cards */
+  .cats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  @media(max-width:680px){ .cats{grid-template-columns:1fr} }
+  .cat{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px; box-shadow:var(--shadow);
+  }
+  .cat .k{font-size:13px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin:0 0 12px; display:flex; align-items:center; gap:8px}
+  .cat .k .ic{font-size:16px}
+  .cat .h{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:16px; font-weight:600; margin:0}
+  .cat .n{font-size:30px; font-weight:700; letter-spacing:-.02em; margin:10px 0 0; font-variant-numeric:tabular-nums}
+  .cat .n .unit{font-size:.42em; color:var(--ink-2); font-weight:600}
+
+  /* Bar chart */
+  .chart{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:clamp(18px,3vw,26px); box-shadow:var(--shadow);
+  }
+  .bar-row{
+    display:grid; grid-template-columns:150px 1fr 64px; align-items:center;
+    gap:14px; padding:5px 0;
+  }
+  @media(max-width:560px){ .bar-row{grid-template-columns:96px 1fr 54px; gap:9px} }
+  .bar-row .commit{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    color:var(--ink-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    display:flex; align-items:center; gap:7px;
+  }
+  .bar-row .rk{color:var(--muted); font-variant-numeric:tabular-nums; width:20px; text-align:right; flex:none}
+  .track{background:var(--grid); border-radius:6px; height:22px; position:relative; overflow:hidden}
+  .fill{
+    height:100%; border-radius:6px; background:var(--blue);
+    display:flex; align-items:center; justify-content:flex-end;
+    transition:filter .15s;
+  }
+  .bar-row:hover .fill{filter:brightness(1.08)}
+  .fill.win{background:var(--good)}
+  .fill.slow{background:var(--critical)}
+  .bar-row .num{font-variant-numeric:tabular-nums; font-weight:600; font-size:14px; text-align:right}
+  .tag{
+    font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:1px 6px; border-radius:5px; flex:none;
+  }
+  .tag.win{background:color-mix(in srgb,var(--good) 18%,transparent); color:var(--good-ink)}
+  .tag.slow{background:color-mix(in srgb,var(--critical) 18%,transparent); color:var(--critical)}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; margin-top:18px; padding-top:16px; border-top:1px solid var(--grid); font-size:13px; color:var(--ink-2)}
+  .legend span{display:inline-flex; align-items:center; gap:7px}
+  .sw{width:12px; height:12px; border-radius:3px}
+
+  /* Methodology */
+  .method{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media(max-width:680px){ .method{grid-template-columns:1fr} }
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px 24px; box-shadow:var(--shadow);
+  }
+  .card h3{margin:0 0 14px; font-size:16px; font-weight:700}
+  .card ul{margin:0; padding:0; list-style:none}
+  .card li{padding:7px 0; border-bottom:1px solid var(--grid); font-size:14px; color:var(--ink-2); display:flex; justify-content:space-between; gap:14px}
+  .card li:last-child{border-bottom:0}
+  .card li b{color:var(--ink); font-weight:600; text-align:right}
+  pre{
+    margin:14px 0 0; background:var(--page); border:1px solid var(--border);
+    border-radius:12px; padding:16px; overflow-x:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; color:var(--ink);
+  }
+  .callout{
+    margin-top:16px; background:color-mix(in srgb,var(--blue) 8%,var(--surface));
+    border:1px solid var(--border); border-left:3px solid var(--blue);
+    border-radius:12px; padding:16px 20px; font-size:15px; color:var(--ink-2);
+  }
+  .callout b{color:var(--ink)}
+  footer{margin-top:56px; padding-top:24px; border-top:1px solid var(--grid); color:var(--muted); font-size:13px}
+  footer code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">llama.cpp regression benchmark</p>
+    <h1>MTP + Vision throughput winners</h1>
+    <p class="lede">A reproducible headless comparison of 17 llama.cpp commits running Qwen3.6-35B-A3B-MTP with an <code>mmproj</code> vision projector and MTP speculative decoding in one server process.</p>
+    <div class="meta-row">
+      <span class="chip"><span class="dot"></span><b>153/153</b>&nbsp;requests OK</span>
+      <span class="chip"><b>17</b>&nbsp;commits</span>
+      <span class="chip"><b>3</b>&nbsp;rounds</span>
+      <span class="chip"><b>3</b>&nbsp;cases / round</span>
+      <span class="chip">Apple Silicon · macOS</span>
+    </div>
+  </header>
+
+  <!-- WINNER -->
+  <section>
+    <div class="sec-head">
+      <h2>Overall winner</h2>
+      <p class="sec-sub">mean of the three per-case median eval speeds</p>
+    </div>
+    <div class="winner">
+      <div>
+        <span class="badge">★ Best aggregate</span>
+        <p class="hash">57fe1f07c3b6</p>
+        <p class="alias">build <b>b9620</b> · committed 2026-06-13 11:51 CEST</p>
+        <div class="headline-num">95.95<span class="unit"> tok/s</span></div>
+        <p class="delta">▲ 27.34% faster than the slowest tested commit</p>
+      </div>
+      <div class="breakdown">
+        <div class="row"><span class="lab">Text</span><span class="val">89.82</span></div>
+        <div class="row"><span class="lab">Vision</span><span class="val">98.80</span></div>
+        <div class="row"><span class="lab">Post-vision</span><span class="val">99.24</span></div>
+        <div class="row total"><span>Mean median eval</span><span>95.95 tok/s</span></div>
+      </div>
+    </div>
+    <div class="callout">
+      <b>Why it won:</b> <code>57fe1f07c3b6</code> did not top every individual case. It took the aggregate because MTP throughput <b>stayed fast after the vision turn</b> — its 99.24 tok/s post-vision speed was the best of the field. On this workload, resilience after multimodal context matters more than peak text or peak vision speed alone.
+    </div>
+  </section>
+
+  <!-- CATEGORY WINNERS -->
+  <section>
+    <div class="sec-head">
+      <h2>Category winners</h2>
+      <p class="sec-sub">fastest commit per case, by median eval tok/s</p>
+    </div>
+    <div class="cats">
+      <div class="cat">
+        <p class="k"><span class="ic">✍️</span>Text</p>
+        <p class="h">e9fb3b3fc030</p>
+        <p class="n">90.00<span class="unit"> tok/s</span></p>
+      </div>
+      <div class="cat">
+        <p class="k"><span class="ic">👁️</span>Vision</p>
+        <p class="h">6ee0f65793da</p>
+        <p class="n">100.74<span class="unit"> tok/s</span></p>
+      </div>
+      <div class="cat">
+        <p class="k"><span class="ic">🔁</span>Post-vision</p>
+        <p class="h">57fe1f07c3b6</p>
+        <p class="n">99.24<span class="unit"> tok/s</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING CHART -->
+  <section>
+    <div class="sec-head">
+      <h2>Full ranking</h2>
+      <p class="sec-sub">all 17 commits — mean median eval throughput</p>
+    </div>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section>
+    <div class="sec-head">
+      <h2>Methodology</h2>
+      <p class="sec-sub">identical model, hardware, prompt, and flags for every commit</p>
+    </div>
+    <div class="method">
+      <div class="card">
+        <h3>Fixed conditions</h3>
+        <ul>
+          <li>Model<b>Qwen3.6-35B-A3B-MTP GGUF</b></li>
+          <li>Vision projector<b>matching mmproj</b></li>
+          <li>Image<b>fixtures/vision.png</b></li>
+          <li>Output cap<b>256 tokens</b></li>
+          <li>Temperature<b>0</b></li>
+          <li>Seed<b>42</b></li>
+          <li>Streaming<b>enabled</b></li>
+          <li>Cases / round<b>text · vision · post-vision</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Server flags</h3>
+        <pre>--mmproj
+-ngl 99
+-c 262144
+-fa on
+--spec-type draft-mtp
+--spec-draft-n-max 2</pre>
+        <div class="callout" style="margin-top:16px">
+          <b>Ranking rule:</b> mean of the three per-case <b>median</b> eval speeds. Always inspect draft acceptance, TTFT, and raw logs before declaring a universal winner.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Generated 2026-07-16 · benchmark key <code>a49f80b7cea2</code> · source: <code>reports/summary.md</code>, <code>reports/REPORT.md</code>. No model weights, outputs, or private prompt contents are included.
+  </footer>
+
+</div>
+
+<script>
+  const data = [
+    {c:"57fe1f07c3b6", v:95.95, tag:"win"},
+    {c:"2f18fe13c5dd", v:95.62},
+    {c:"f2d1c2f3984c", v:95.61},
+    {c:"f5525f7e7a7e", v:95.59},
+    {c:"fdb1db877c52", v:95.58},
+    {c:"e9fb3b3fc030", v:95.55},
+    {c:"6ee0f65793da", v:94.18},
+    {c:"9df06805eee8", v:84.79},
+    {c:"c16c35b8142a", v:83.32},
+    {c:"5a6a0dd7e1f7", v:81.19},
+    {c:"487a6cc164d9", v:81.06},
+    {c:"1a87dcdc452d", v:78.88},
+    {c:"e7e3f350904c", v:78.50},
+    {c:"ded1561b4228", v:77.52},
+    {c:"d14ce3dab4de", v:77.18},
+    {c:"9a532ae4bab1", v:76.80},
+    {c:"b11f7c16bc1c", v:75.35, tag:"slow"},
+  ];
+  const max = Math.max(...data.map(d=>d.v));
+  const min = 70; // axis floor so differences read
+  const chart = document.getElementById("chart");
+  data.forEach((d,i)=>{
+    const pct = ((d.v - min) / (max - min)) * 100;
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    const cls = d.tag === "win" ? " win" : d.tag === "slow" ? " slow" : "";
+    const tag = d.tag === "win" ? '<span class="tag win">Winner</span>'
+              : d.tag === "slow" ? '<span class="tag slow">Slowest</span>' : '';
+    row.innerHTML =
+      `<div class="commit"><span class="rk">${i+1}</span><span title="${d.c}">${d.c}</span></div>`+
+      `<div class="track" title="${d.c} — ${d.v.toFixed(2)} tok/s"><div class="fill${cls}" style="width:${pct.toFixed(1)}%"></div></div>`+
+      `<div class="num">${d.v.toFixed(2)}${tag?' ':''}</div>`;
+    chart.appendChild(row);
+  });
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  legend.innerHTML =
+    `<span><span class="sw" style="background:var(--good)"></span>Overall winner</span>`+
+    `<span><span class="sw" style="background:var(--blue)"></span>Tested commit</span>`+
+    `<span><span class="sw" style="background:var(--critical)"></span>Slowest aggregate</span>`+
+    `<span style="color:var(--muted)">axis starts at 70 tok/s to show spread</span>`;
+  chart.appendChild(legend);
+</script>
+</body>
+</html>
